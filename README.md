@@ -3,14 +3,14 @@
 funcional mas ainda em desenvolvimento.
 
 #Dash
-![alt tag](https://github.com/wesleyleite//blob/master/DataProtector-JobSearch/img/dash.png)
+![alt tag](https://github.com/wesleyleite/DataProtector-JobSearch/blob/master/img/dash.png)
 
 # Interface de consuta de host
-![alt tag](https://github.com/wesleyleite//blob/master/DataProtector-JobSearch/img/search.png)
+![alt tag](https://github.com/wesleyleite/DataProtector-JobSearch/blob/master/img/search.png)
 
 
 # Após encontrar o host podemos explodir os dados.
-![alt tag](https://github.com/wesleyleite//blob/master/DataProtector-JobSearch/img/job.png)
+![alt tag](https://github.com/wesleyleite/DataProtector-JobSearch/blob/master/img/job.png)
 
 #Objetivos ainda a serem concluidos
 
