@@ -1,0 +1,31 @@
+{% include "base.html"   %}
+{% block content %}
+<br />
+
+<div class='container'>
+    <div class='row'>
+    <div class='box pull-left azul'>
+        <p> Client </p>
+        <span class='contador sombra'>  {{ dados[0] }} </span>
+    </div>
+
+    <div class='box pull-left verde'>
+        <p> Datalist </p>
+        <span class='contador sombra'>  {{ dados[1] }} </span>
+    </div>
+
+    <div class='box pull-left purpura'>
+        <p> Schedules </p>
+        <span class='contador sombra'>  {{ dados[2] }} </span>
+    </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+    {% block footer %}
+        <div class='footer'>
+        </div>
+    {% endblock %}
