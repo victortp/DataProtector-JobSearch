@@ -7,14 +7,136 @@ from funcoes import FindHostInJob, CountLineOfFile, CountFileInDir
 import codecs
 import re
 
+from datetime import datetime
+now = datetime.now()
+    
 @app.route('/', methods=['GET'])
 def index():
     NUM_DATALIST = CountFileInDir(DataListDir)
     NUM_SCHEDULE = CountFileInDir(SchedulesDir)
+
+    LISTA_DIARIA = []
+    try:
+        PARAM = request.args.get('backup')
+    except:
+        PARAM = ''
+
+
+
+
+
+    LISTA_HOSTS = []
+    VAR = []
+    try:
+        PARAM = request.args.get('host')
+    except:
+        PARAM = ''
+
+    file = codecs.open(cell_info, 'r', encoding='utf-16')
+    ''' STRING SPLIT '''
+    '''-host "mggenesaplp1.energisa.corp" -os "microsoft i386 wNT-6.0-S" -da A.09.00 -ma A.09.00 -ts_core A.09.00'''
+    for line in file.readlines():
+        HOST = line.split('"')[1]
+        OS = line.split('"')[3]
+        VERSION = line.split()[7]
+        linha = str(HOST+':'+OS)
+        LISTA_HOSTS.append(linha)
+        VAR.append(HOST)
+        
+    file.close()
+
+    JOBS = []
+    for host in VAR:
+        ''' pega os jobs do host '''
+        jobs = FindHostInJob(host)
+        
+        ''' verifica se tem que fazer o job hoje '''
+        AUX = []
+        for job in jobs:
+            SchedulesFile = SchedulesDir+'/'+job
+            fileSC = codecs.open(SchedulesFile, 'r', encoding='utf-16')
+            a = False
+            b = False
+            c = False
+            dia = None
+            hora = None
+            exclude = None
+            
+            for linesc in fileSC.readlines():
+                ''' Verifica quando vai ser executado '''
+                if '-every' in linesc:
+                    a = True
+                    continue
+
+                if a == True:
+                    dia = linesc.replace("\t", "").replace("\n", "").replace("\r", "").replace("-day ", "")[:-1]
+        
+                    a = False
+                    b = True
+                    continue
+                    
+                if b:
+                    hora = linesc.replace("\t", "").replace("\n", "").replace("\r", "").replace("-at ", "")
+                    b = False
+                    
+                ''' Verifica quando não vai ser executado '''
+                if '-exclude' in linesc:
+                    c = True
+                    continue
+
+                if c:
+                    exclude = linesc.replace("\t", "").replace("\n", "").replace("\r", "").replace("-day ", "").replace(" ", "")
+                    if exclude.isdigit() and int(exclude) < 10:
+                        exclude = '0' + exclude
+                    c = False
+
+            ''' Popula o array com as informações do job '''        
+            AUX.append({"name": job, "dia": dia, "hora": hora, "exclude": exclude})
+        JOBS.append({"host": host, "jobs": AUX})
+
+    A = []
+
+    for host in JOBS:
+        AUX = []
+        for job in host['jobs']:
+            ''' Verificação dos jobs diários '''
+            if job['dia'] == "":
+                if job['exclude'] is not None:
+                    if job['exclude'] != now.strftime('%a') and job['exclude'] != now.strftime('%d'):
+                        AUX.append(job)
+                else:
+                    AUX.append(job)
+
+            ''' Verificação dos jobs semanais '''
+            if now.strftime('%a') in str(job['dia']):
+                if job['exclude'] is not None:
+                   if job['exclude'] != now.strftime('%d'):
+                       AUX.append(job)
+                else:
+                    AUX.append(job)
+
+            ''' Verificação dos jobs mensais '''
+            if "-month" in str(job['dia']):
+                d = job['dia'].replace(' -month', '')
+                ''' formata o dia '''
+                if d.isdigit() and int(d) < 10:
+                    d = '0' + d
+
+                if d == now.strftime('%d'):
+                    AUX.append(job)
+                    
+        A.append({'host': host, 'jobs': AUX})
+    
     return render_template('dash.html', dados = [
-        CountLineOfFile(cell_info),
-        NUM_DATALIST,
-        NUM_SCHEDULE ])
+    CountLineOfFile(cell_info),
+    NUM_DATALIST,
+    NUM_SCHEDULE,
+    now.day,
+    now.month,
+    VAR,
+    JOBS,
+    A])
+
 
 @app.route('/search', methods=['GET'])
 def search():
@@ -111,4 +233,3 @@ def jobsearch():
         fileSC.close()
 
     return render_template('job.html', jobs = [retorno, host, JOBDATA, JOBSC])
-

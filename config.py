@@ -12,6 +12,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 ''' 
 
 cell_info = basedir+'/Config-EXAMPLE-OMNIBACK/Server/cell/cell_info'
-DataListDir = basedir+'/Config-EXAMPLE-OMNIBACK/Server/DataList'
+DataListDir = basedir+'/Config-EXAMPLE-OMNIBACK/Server/DataList/'
 SchedulesDir = basedir+'/Config-EXAMPLE-OMNIBACK/Server/Schedulles'
 

@@ -1,5 +1,6 @@
 {% include "base.html"   %}
 {% block content %}
+
 <br />
 
 <div class='container'>
@@ -18,7 +19,42 @@
         <p> Schedules </p>
         <span class='contador sombra'>  {{ dados[2] }} </span>
     </div>
-    </div>
+	</div>
+	
+	<div style="margin-top: 50px; margin-bottom: 50px; background: #eee; padding: 20px">
+		<!--<div class="row">
+			<ul>
+			{% for data in dados[6] %}
+				<li>
+					{{ data.host }}
+					<ul>
+						{% for job in data.jobs %}
+							<li>{{ job }}</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+		</div> -->
+		
+		<div class="row">
+			<ul>
+			{% for data in dados[7] %}
+				<li>
+					{{ data.host.host }}
+					<ul>
+						{% for job in data.jobs %}
+							<li>
+								<b>{{ job.name }}</b> - <span class="glyphicon glyphicon-time"></span> {{ job.hora }}
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+	
 </div>
 
 
