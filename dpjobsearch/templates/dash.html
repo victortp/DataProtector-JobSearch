@@ -22,6 +22,7 @@
 	</div>
 	
 	<div style="margin-top: 50px; margin-bottom: 50px; background: #eee; padding: 20px">
+<<<<<<< HEAD
 		<div class="row">
 			<ul>
 			{% for data in dados[6] %}
@@ -41,6 +42,39 @@
 			{% endfor %}
 			</ul>
 		</div>-->
+=======
+		<!--<div class="row">
+			<ul>
+			{% for data in dados[6] %}
+				<li>
+					{{ data.host }}
+					<ul>
+						{% for job in data.jobs %}
+							<li>{{ job }}</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+		</div> -->
+		
+		<div class="row">
+			<ul>
+			{% for data in dados[7] %}
+				<li>
+					{{ data.host.host }}
+					<ul>
+						{% for job in data.jobs %}
+							<li>
+								<b>{{ job.name }}</b> - <span class="glyphicon glyphicon-time"></span> {{ job.hora }}
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+>>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
 	</div>
 	
 </div>
