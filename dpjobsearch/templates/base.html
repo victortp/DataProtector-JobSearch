@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <title>Search Job by HOST</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="HPe Data Protector">
+    
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- BOOOTSTRAP -->
+    
+    <script type="text/javascript">
+        var datefield=document.createElement("input")
+            datefield.setAttribute("type", "date")
+                if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+                        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+                                document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
+    }
+        </script>
+
+    <style>
+        .verde { background-color: #4e9c91; }
+        .azul { background-color: #4e4e9c; }
+        .purpura { background-color: #974e9c; }
+		.cinza {background-color: #708090; }
+		.azul1 {background-color: #2F4F4F; }
+        .box {
+            padding: 1px;
+            margin-left: 10px;
+			width: 300px; 
+            height: 120px;
+            color: #fff;
+            font-size: 10pt;
+            text-align: center;
+        }
+		
+		.box1 {
+            padding: 1px;
+			margin-top: 80px;
+			margin-left: 215px;
+			width: 520px; 
+            height: 155px;
+            color: #fff;
+            font-size: 12pt;
+            text-align: center;
+        }
+		
+		.box2 {
+            padding: 1px;
+			margin-top: 250px;
+			margin-left: 15px;
+			width: 940px; 
+            height: 155px;
+            color: #fff;
+            font-size: 12pt;
+            text-align: center;
+        }
+
+        .contador { 
+            font-size: 50pt;
+        }
+		
+		.contador1 { 
+            font-size: 30pt;
+        }
+        
+        .sombra { 
+            text-shadow: 2px 2px #403131;
+        }
+     </style>
+
+  </head>
+
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="/">Job Search</a>
+       </div>
+        <ul class="nav navbar-nav">
+        <li class=""><a href="/search">HOST</a></li>
+        <li class=""><a href="/job?host=">ROTINAS</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <!--li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li-->
+        </ul>
+    </div>
+</nav>
+<br />
+ 
+<br />{% block content %}{% endblock %}
+
+    <br />
+
+    {% block footer %}{% endblock %}
+
+  </body>
+</html>

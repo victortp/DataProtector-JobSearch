@@ -1,0 +1,55 @@
+{% include "base.html"   %}
+{% block content %}
+
+<br />
+
+<div class='container'>
+    <div class='row'>
+    <div class='box pull-left azul'>
+        <p> Client </p>
+        <span class='contador sombra'>  {{ dados[0] }} </span>
+    </div>
+
+    <div class='box pull-left verde'>
+        <p> Datalist </p>
+        <span class='contador sombra'>  {{ dados[1] }} </span>
+    </div>
+
+    <div class='box pull-left purpura'>
+        <p> Schedules </p>
+        <span class='contador sombra'>  {{ dados[2] }} </span>
+    </div>
+	</div>
+	
+	<div style="margin-top: 50px; margin-bottom: 50px; background: #eee; padding: 20px">
+		<div class="row">
+			<ul>
+			{% for data in dados[6] %}
+				<li>
+					<b>{{ data.name }}</b> - <span class="glyphicon glyphicon-time"></span> {{ data.hora }}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+		
+		<!--<div class="row">
+			<ul>
+			{% for data in dados[6] %}
+				<li>
+					{{ data }}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>-->
+	</div>
+	
+</div>
+
+
+
+{% endblock %}
+
+    {% block footer %}
+        <div class='footer'>
+        </div>
+    {% endblock %}
