@@ -1,9 +1,6 @@
 # *-* coding: utf-8 *-*
 
-<<<<<<< HEAD
 import os
-=======
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
 from flask import Flask, render_template, request
 from dpjobsearch import app
 from config import cell_info, DataListDir, SchedulesDir
@@ -25,13 +22,6 @@ def index():
     except:
         PARAM = ''
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
     LISTA_HOSTS = []
     VAR = []
     try:
@@ -53,23 +43,11 @@ def index():
     file.close()
 
     JOBS = []
-<<<<<<< HEAD
     for _, _, filelist in os.walk(SchedulesDir):
         for FileName in filelist:
             PATHDIR=SchedulesDir+'/'+FileName
 
             fileSC = codecs.open(PATHDIR, 'r', encoding='utf-16')
-=======
-    for host in VAR:
-        ''' pega os jobs do host '''
-        jobs = FindHostInJob(host)
-        
-        ''' verifica se tem que fazer o job hoje '''
-        AUX = []
-        for job in jobs:
-            SchedulesFile = SchedulesDir+'/'+job
-            fileSC = codecs.open(SchedulesFile, 'r', encoding='utf-16')
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
             a = False
             b = False
             c = False
@@ -105,7 +83,6 @@ def index():
                         exclude = '0' + exclude
                     c = False
 
-<<<<<<< HEAD
             if hora is not None:
                 h = hora.split(':')
                 horaDT = datetime.now()
@@ -131,34 +108,6 @@ def index():
                     JOBS.append(job)
 
             # Verificação dos jobs mensais
-=======
-            ''' Popula o array com as informações do job '''        
-            AUX.append({"name": job, "dia": dia, "hora": hora, "exclude": exclude})
-        JOBS.append({"host": host, "jobs": AUX})
-
-    A = []
-
-    for host in JOBS:
-        AUX = []
-        for job in host['jobs']:
-            ''' Verificação dos jobs diários '''
-            if job['dia'] == "":
-                if job['exclude'] is not None:
-                    if job['exclude'] != now.strftime('%a') and job['exclude'] != now.strftime('%d'):
-                        AUX.append(job)
-                else:
-                    AUX.append(job)
-
-            ''' Verificação dos jobs semanais '''
-            if now.strftime('%a') in str(job['dia']):
-                if job['exclude'] is not None:
-                   if job['exclude'] != now.strftime('%d'):
-                       AUX.append(job)
-                else:
-                    AUX.append(job)
-
-            ''' Verificação dos jobs mensais '''
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
             if "-month" in str(job['dia']):
                 d = job['dia'].replace(' -month', '')
                 ''' formata o dia '''
@@ -166,16 +115,10 @@ def index():
                     d = '0' + d
 
                 if d == now.strftime('%d'):
-<<<<<<< HEAD
                     JOBS.append(job)
 
     # Ordena os JOBS pela hora
     JOBS = sorted(JOBS, key=lambda dct: dct['horaDT'])      
-=======
-                    AUX.append(job)
-                    
-        A.append({'host': host, 'jobs': AUX})
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
     
     return render_template('dash.html', dados = [
     CountLineOfFile(cell_info),
@@ -184,12 +127,7 @@ def index():
     now.day,
     now.month,
     VAR,
-<<<<<<< HEAD
     JOBS])
-=======
-    JOBS,
-    A])
->>>>>>> 0b42581bd273462778ce3f45664f334bab609e2b
 
 
 @app.route('/search', methods=['GET'])
